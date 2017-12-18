@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds">
+	<property name="logstash.path" value="/logs/${tomcat_app_base}" />
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <File>${logstash.path}/spring-study.log</File>
+        <encoder>
+            <Pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{sourceThread} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logstash.path}/spring-study-rolling.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logstash.path}/spring-study-rolling-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{sourceThread} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{sourceThread} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.study.spring.test.service" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="ROLLING-FILE" />-->
+        <appender-ref ref="FILE" />
+    </logger>
+
+	<jmxConfigurator />
+	<root level="TRACE">
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="ROLLING-FILE" />-->
+        <appender-ref ref="FILE" />
+	</root>
+</configuration>
