@@ -5,11 +5,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.study.spring.Json.ObjectMapperFactory;
-import com.study.spring.annotation.Json;
+import com.study.spring.annotation.RequestJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -30,7 +29,7 @@ public class JsonMethodArgumentResolver implements HandlerMethodArgumentResolver
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(Json.class);
+        return parameter.hasParameterAnnotation(RequestJson.class);
     }
 
     @Override
@@ -51,28 +50,14 @@ public class JsonMethodArgumentResolver implements HandlerMethodArgumentResolver
             params = lines.toString();
         }
         JsonNode node = objectMapper.readTree(params);
-        Json jsonAnn = parameter.getParameterAnnotation(Json.class);
-        String path = jsonAnn.path();
-        if ("".equals(path)) {
-            path = parameter.getParameterName();
-            if (node.has(path)) {
-                ObjectReader objectReader = objectMapper.reader(getReferenceType(parameter));
-                Object readValue = objectReader.readValue(node.path(path));
-                return readValue;
-            } else {
-                Object readValue = objectMapper.readValue(params, getReferenceType(parameter));
-                return readValue;
-            }
-        } else {
-            String[] paths = StringUtils.split(path, "/");
-            for (String p : paths) {
-                node = node.path(p);
-            }
-            if (node == null) {
-                return null;
-            }
+        String path = parameter.getParameterName();
+        if (node.has(path)) {
             ObjectReader objectReader = objectMapper.reader(getReferenceType(parameter));
-            return objectReader.readValue(node);
+            Object readValue = objectReader.readValue(node.path(path));
+            return readValue;
+        } else {
+            Object readValue = objectMapper.readValue(params, getReferenceType(parameter));
+            return readValue;
         }
     }
 

@@ -1,16 +1,15 @@
 package com.study.spring.test.controller;
 
-import com.study.spring.annotation.Json;
+import com.study.spring.annotation.RequestJson;
+import com.study.spring.annotation.ResponseJson;
+import com.study.spring.test.data.TestData;
 import com.study.spring.test.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.Map;
 
 @Controller
 public class TestController {
@@ -22,17 +21,18 @@ public class TestController {
 
 
     @RequestMapping(value = "/logback/test")
-    public @ResponseBody
-    String testLogback(@Json Map<String, Object> map) {
+    public @ResponseJson TestData testLogback(@RequestJson TestData map) throws Exception {
         LOG.info("this is a info log, map: " + map);
-        LOG.info("this is a info log, name: " + map.get("name"));
-        LOG.info("this is a info log, type: " + map.get("type"));
-        return testService.logbackTest();
+        LOG.info("this is a info log, name: " + map.getName());
+        LOG.info("this is a info log, type: " + map.getType());
+        LOG.info("this is a info log, sub: " + map.getSubDatas());
+        testService.logbackTest();
+        return map;
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public @ResponseBody String exceptionHandler() {
-        LOG.error("exceptions");
-        return "there's something wrong with me";
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    public @ResponseBody String exceptionHandler() {
+//        LOG.error("exceptions");
+//        return "there's something wrong with me";
+//    }
 }

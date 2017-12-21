@@ -30,6 +30,11 @@ public class Base64Coder implements Coder {
         return Base64.encodeBase64String(value.getBytes());
     }
 
+    @Override
+    public byte[] encode(byte[] value) {
+        return Base64.encodeBase64(value);
+    }
+
     public boolean isBase64Encode(String value) {
         return Base64.isBase64(value);
     }

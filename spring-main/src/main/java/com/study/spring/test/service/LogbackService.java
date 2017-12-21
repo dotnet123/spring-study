@@ -9,10 +9,9 @@ public class LogbackService {
 
     private final static Logger LOG = LoggerFactory.getLogger(LogbackService.class);
 
-    public void testLogback() {
+    public void testLogback() throws Exception {
         LOG.debug("logbackService debug log");
-        int i = 0;
-        int j = 100/i;
+        throw new Exception("系统异常");
     }
 
 }

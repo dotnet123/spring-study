@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 
 public class ObjectMapperFactory {
 
-	private static final ObjectMapper objectMapper = new ObjectMapper();
+	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	static {
 //		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
@@ -17,11 +17,11 @@ public class ObjectMapperFactory {
 //				.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 //				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
 //				.registerModule(new BirdModule());
-		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		OBJECT_MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 	}
 
 	public static ObjectMapper getDefaultObjectMapper() {		
-		return objectMapper.copy();
+		return OBJECT_MAPPER.copy();
 	}
 
 }

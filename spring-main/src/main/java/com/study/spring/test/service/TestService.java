@@ -14,7 +14,7 @@ public class TestService {
     @Resource
     private LogbackService logbackService;
 
-    public String logbackTest() {
+    public String logbackTest() throws Exception {
         LOG.debug("this is a debug log in info model");
         logbackService.testLogback();
         return "this is a test";

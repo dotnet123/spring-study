@@ -40,7 +40,7 @@ public class Base64RequestWrapper extends HttpServletRequestWrapper {
     public Base64RequestWrapper(HttpServletRequest request, Base64Coder base64Coder) throws IOException {
         super(request);
         coder = base64Coder;
-        this.params.putAll(request.getParameterMap());
+//        this.params.putAll(request.getParameterMap());
         initParams();
     }
 
