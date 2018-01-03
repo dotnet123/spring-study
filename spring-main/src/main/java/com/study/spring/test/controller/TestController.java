@@ -20,9 +20,19 @@ public class TestController {
     private TestService testService;
 
 
-    @RequestMapping(value = "/logback/test")
+    @RequestMapping(value = "/logback/test", headers = "appVersion=1.0.0")
     public @ResponseJson TestData testLogback(@RequestJson TestData map) throws Exception {
-        LOG.info("this is a info log, map: " + map);
+        LOG.info("this is a info log 1.0.0, map: " + map);
+        LOG.info("this is a info log, name: " + map.getName());
+        LOG.info("this is a info log, type: " + map.getType());
+        LOG.info("this is a info log, sub: " + map.getSubDatas());
+        testService.logbackTest();
+        return map;
+    }
+
+    @RequestMapping(value = "/logback/test", headers = "appVersion=2.0.0")
+    public @ResponseJson TestData testLogback2(@RequestJson TestData map) throws Exception {
+        LOG.info("this is a info log 2.0.0, map: " + map);
         LOG.info("this is a info log, name: " + map.getName());
         LOG.info("this is a info log, type: " + map.getType());
         LOG.info("this is a info log, sub: " + map.getSubDatas());

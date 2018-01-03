@@ -12,11 +12,10 @@ public class ObjectMapperFactory {
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	static {
-//		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-//				.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-//				.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-//				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
-//				.registerModule(new BirdModule());
+		OBJECT_MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+				.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+				.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 		OBJECT_MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 	}
 
