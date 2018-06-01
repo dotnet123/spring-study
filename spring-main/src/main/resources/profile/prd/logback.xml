@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="5 minutes">
-	<property name="logstash.path" value="/opt/tiefan/logs/tomcat/app/${tomcat_app_base}" />
+	<property name="logstash.path" value="/logs/${tomcat_app_base}" />
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
 		<File>${logstash.path}/spring-study.log</File>
 		<encoder>

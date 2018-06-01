@@ -15,8 +15,6 @@ import java.io.OutputStream;
 
 /**
  * 
- * @copyright(C) 2006-2012 Tuniu All rights reserved
- * @author xiehui
  */
 public class EncodingJsonHttpMessageConverter extends MappingJackson2HttpMessageConverter {
 
