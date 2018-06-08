@@ -31,15 +31,5 @@ public class TestProxy {
         JDKProxy jdkProxy = new JDKProxy();
         UserManager userManagerJDK = (UserManager) jdkProxy.newProxy(new UserManagerImpl());
         userManagerJDK.addUser("tom", "root");
-
-        String s = StringUtils.applyRelativePath("D:/下载/test.xlsx", "new.txt");
-        System.out.println(s);
-
-        LocalDate ld = LocalDate.parse("2018-09-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println(ld);
-        LocalDateTime of = LocalDateTime.of(ld, LocalTime.of(8, 0));
-        System.out.println(of.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        LocalDateTime of2 = LocalDateTime.of(ld, LocalTime.of(9, 0));
-        System.out.println(of2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 }
