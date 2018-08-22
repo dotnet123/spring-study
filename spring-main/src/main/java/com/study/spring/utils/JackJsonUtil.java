@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -24,7 +23,7 @@ public class JackJsonUtil {
 		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
 				.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
 				.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true).registerModule(new JavaTimeModule());
+				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 	}
 
 	public static String toJson(Object obj) {

@@ -2,6 +2,8 @@ package com.study.spring.utils;
 
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -112,35 +114,14 @@ public class LocalDateUtil {
     public static Long between(Date start, Date end) {
         LocalDate startDate = convertDateToLocalDate(start);
         LocalDate endDate = convertDateToLocalDate(end);
+        return between(startDate, endDate);
+    }
+
+    public static Long between(LocalDate startDate, LocalDate endDate) {
 //        return Period.between(startDate,endDate).getDays(); error: 间隔天数跨月会有问题
         return endDate.toEpochDay() - startDate.toEpochDay();
     }
 
-    public static void main(String[] args) {
-        long ageMinutes = 99 * 24 * 60;
-        System.out.println("99天: " + ageMinutes);
-        long invalidMinutes = 999 * 24 * 60;
-        System.out.println("999天: " + invalidMinutes);
-        LocalDateTime startTime = LocalDateTime.of(2018, 6,18,14,15,16);
-        System.out.println(startTime);
-        LocalDateTime time = startTime.plusDays(999).plusMinutes(-60);
-        System.out.println(time);
-        Duration between = Duration.between(startTime, time);
-        System.out.println(between.toMinutes());
-        if (between.toMinutes() >= ageMinutes - 60 && between.toMinutes() <= ageMinutes + 60) {
-            System.out.println("有效期是否等于99");
-        } else if (between.toMinutes() >= invalidMinutes - 60 && between.toMinutes() <= invalidMinutes + 60) {
-            System.out.println("有效期是否等于999");
-        } else {
-            System.out.println("有效期不等于99天和999天");
-        }
 
-        long days = (((LocalDate.now().toEpochDay() - startTime.toLocalDate().toEpochDay()) / 30) + 1) * 30;
-        System.out.println(days);
-        System.out.println(startTime.plusDays(days));
-
-        int ddAlertExpire = (int) TimeUnit.MINUTES.toSeconds(10);
-        System.out.println(ddAlertExpire);
-    }
 
 }

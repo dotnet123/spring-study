@@ -5,7 +5,7 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <File>${logstash.path}/spring-study.log</File>
         <encoder>
-            <Pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{sourceThread} - %msg%n</Pattern>
+            <Pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{reqId} - %msg%n</Pattern>
         </encoder>
     </appender>
 
@@ -16,13 +16,13 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
-            <Pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{sourceThread} - %msg%n</Pattern>
+            <Pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{reqId} - %msg%n</Pattern>
         </encoder>
     </appender>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{sourceThread} - %msg%n</pattern>
+			<pattern>%date{ISO8601} [%thread] %-5level %logger{36}:%L %X{reqId} - %msg%n</pattern>
 		</encoder>
 	</appender>
 
